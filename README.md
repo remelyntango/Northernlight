@@ -217,6 +217,61 @@ Application code is convenience; the database is the boundary.
 To verify: sign in as one user and try to edit or delete another user's article
 via a direct REST call with the anon key. It must fail with a policy violation.
 
+## Deployment
+
+Runs on Vercel. Nothing in the code is Vercel-specific — no `@vercel/*` packages,
+no edge-runtime pinning — so it will run on any Node host if that changes.
+
+`vercel.json` pins functions to **dub1 (Dublin)**, the same AWS region as the
+Supabase project. Every page makes several database round-trips, so co-locating
+them matters more than being close to any particular reader.
+
+### First deploy
+
+1. **Import the repo** at [vercel.com/new](https://vercel.com/new). Framework
+   detection picks up Next.js; no build settings to change.
+
+2. **Environment variables** (Settings → Environment Variables), all three
+   environments:
+
+   | Variable | Value |
+   | --- | --- |
+   | `NEXT_PUBLIC_SUPABASE_URL` | `https://<project-ref>.supabase.co` |
+   | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | the publishable key |
+   | `NEXT_PUBLIC_SITE_URL` | `https://<your-domain>` |
+   | `NEXT_PUBLIC_GOOGLE_AUTH_ENABLED` | `false` until Google is configured |
+
+   No secrets here. The publishable key grants nothing on its own — RLS filters
+   every request it makes. The service-role key must **never** be added to
+   Vercel; it exists only for local seeding.
+
+3. **Custom domain** (Settings → Domains): add it, then create the record Vercel
+   shows at your registrar — a `CNAME` to `cname.vercel-dns.com` for a
+   subdomain. TLS is issued automatically.
+
+4. **Point Supabase at the live site.** This is the step that is easy to forget
+   and breaks signup in a way that looks like nothing is wrong:
+
+   ```bash
+   # supabase/.env
+   SITE_URL=https://your-domain
+   ```
+   ```bash
+   npx supabase config push
+   ```
+
+   `SITE_URL` builds the link inside every confirmation email. Leave it on
+   localhost and new members get a link to their own machine.
+
+### After deploying
+
+```bash
+APP_URL=https://your-domain npm run verify:app
+```
+
+Runs the same 33 checks against production. Confirm search works signed-out and
+that a confirmation link completes the round trip.
+
 ## Scripts
 
 ```bash
