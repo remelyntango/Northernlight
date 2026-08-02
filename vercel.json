@@ -4,11 +4,11 @@
   "framework": "nextjs",
   "redirects": [
     {
-      "source": "/:path*",
+      "source": "/(.*)",
       "has": [
         { "type": "host", "value": "northernlight-eight.vercel.app" }
       ],
-      "destination": "https://nordlys.sandvaer.dk/:path*",
+      "destination": "https://nordlys.sandvaer.dk/$1",
       "statusCode": 301
     }
   ],
