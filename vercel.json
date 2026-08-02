@@ -4,7 +4,6 @@
   "framework": "nextjs",
   "redirects": [
     {
-      "// note": "Vercel serves the project on its generated .vercel.app alias as well as the custom domain. Two live addresses for identical content splits search ranking and lets auth callbacks arrive from an unexpected origin, so the alias is sent to the canonical host. The host is matched exactly rather than by wildcard, which deliberately leaves per-deployment preview URLs reachable.",
       "source": "/:path*",
       "has": [
         { "type": "host", "value": "northernlight-eight.vercel.app" }
