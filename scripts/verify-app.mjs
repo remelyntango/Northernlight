@@ -120,6 +120,64 @@ if (!serviceKey) {
 
     await admin.auth.admin.deleteUser(created.user.id);
   }
+
+  /* ------------------------------------------------ confirmation link --- */
+  // Regression guard. Supabase's default {{ .ConfirmationURL }} returns the
+  // session in a URL *fragment*, which no server can read — so members got
+  // confirmed but landed signed out on /login?error=missing_code. The custom
+  // template + /auth/confirm route fixed it, and this keeps it fixed.
+  //
+  // Addressed to Resend's simulator so no real inbox is ever involved.
+  console.log("\nConfirmation link (token_hash flow)");
+
+  const confirmEmail = `delivered+verify${Date.now()}@resend.dev`;
+  const { data: link, error: linkErr } = await admin.auth.admin.generateLink({
+    type: "signup",
+    email: confirmEmail,
+    password: "verify-password-123",
+    options: { data: { display_name: "Confirm User" } },
+  });
+  check("confirmation token generated", !linkErr, linkErr?.message);
+
+  if (link?.properties?.hashed_token) {
+    // Built exactly as supabase/templates/confirmation.html builds it.
+    const url = `${APP}/auth/confirm?token_hash=${link.properties.hashed_token}&type=signup`;
+
+    const res = await fetch(url, { redirect: "manual" });
+    const loc = res.headers.get("location");
+    const cookies = res.headers.getSetCookie?.() ?? [];
+
+    check(
+      "link lands in the app, not back on /login",
+      Boolean(loc) && !loc.includes("/login"),
+      loc ?? "(no redirect)",
+    );
+    check(
+      "session cookie is set server-side",
+      cookies.some((c) => c.startsWith("sb-")),
+      `${cookies.length} cookie(s)`,
+    );
+
+    if (cookies.length) {
+      const jar = cookies.map((c) => c.split(";")[0]).join("; ");
+      const page = await get(loc.startsWith("http") ? loc.slice(APP.length) : loc, jar);
+      check(
+        "app renders them as signed in",
+        page.body.includes("New post") && !page.body.includes(">Sign up<"),
+      );
+    }
+
+    const replay = await fetch(url, { redirect: "manual" });
+    check(
+      "a used token cannot be replayed",
+      (replay.headers.get("location") ?? "").includes("/login?error="),
+    );
+
+    const { data: list } = await admin.auth.admin.listUsers({ perPage: 1000 });
+    const confirmed = list.users.find((u) => u.email === confirmEmail);
+    check("account is email-confirmed", Boolean(confirmed?.email_confirmed_at));
+    if (confirmed) await admin.auth.admin.deleteUser(confirmed.id);
+  }
 }
 
 /* ------------------------------------------------- signed-in browsing --- */
