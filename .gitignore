@@ -38,10 +38,12 @@ yarn-error.log*
 # vercel
 .vercel
 
-# supabase cli local state (migrations and seed.sql ARE committed)
+# supabase cli local state (migrations and config.toml ARE committed)
 /supabase/.branches
 /supabase/.temp
+# holds the SMTP + OAuth secrets that config.toml reads via env(...)
 /supabase/.env
+!/supabase/.env.example
 
 # typescript
 *.tsbuildinfo

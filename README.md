@@ -92,17 +92,56 @@ and impersonate another's content, escalate to admin, read the moderation queue,
 and see unpublished drafts. All of it must fail. Run it after touching any
 policy.
 
-## Known limits
+## Auth configuration
 
-**Email delivery is rate-limited.** Supabase's built-in SMTP allows only a couple
-of messages per hour, which is fine for development but *will* block real
-signups. Before launch, either configure a custom SMTP provider under
-**Authentication → Emails** (Resend, Postmark and SendGrid all work), or turn off
-email confirmation under **Authentication → Providers → Email**.
+Auth settings live in `supabase/config.toml` and are applied with:
 
-**Google sign-in needs setup.** The button is wired up, but the provider must be
-enabled under **Authentication → Providers → Google** with a client ID and
-secret, and `<site>/auth/callback` added to the allowed redirect URLs.
+```bash
+cp supabase/.env.example supabase/.env    # fill in the secrets
+npx supabase config push
+```
+
+Keeping them in the repo rather than in the dashboard means the settings are
+reviewable, diffable and reproducible on a fresh project. Secrets are referenced
+as `env(NAME)` and read from `supabase/.env`, which is gitignored.
+
+### Email
+
+Supabase's built-in sender is capped at **2 emails per hour** and the cap cannot
+be raised — it exists because every project shares that sender's reputation.
+Real signups therefore need your own SMTP, which is why `config.toml` points at
+[Resend](https://resend.com) (3,000/month free).
+
+Notably *not* used: the domain host's own mailbox SMTP. Most shared hosts
+auto-suspend a mailbox that sends a few hundred messages in a short window —
+which would take out a real person's email along with the portal's signups. A
+transactional provider keeps the app's sending reputation separate from anyone's
+inbox.
+
+Setup:
+
+1. Add and verify your domain at Resend → **Domains** (three DNS records at your
+   registrar: DKIM, SPF, and a return-path CNAME).
+2. Create an API key, put it in `supabase/.env` as `RESEND_API_KEY`.
+3. Set `MAIL_FROM` to an address on the verified domain.
+4. `npx supabase config push`.
+
+Without SPF/DKIM, confirmation emails go to spam regardless of the provider.
+
+### Google sign-in
+
+Google verifies the address itself, so this path sends no email at all — worth
+enabling regardless of SMTP.
+
+1. Google Cloud Console → **APIs & Services → Credentials → Create OAuth client
+   ID** (type: Web application).
+2. Authorised redirect URI: `https://<project-ref>.supabase.co/auth/v1/callback`
+   — Supabase's callback, *not* the app's.
+3. Put the client ID and secret in `supabase/.env`.
+4. `npx supabase config push`.
+
+`SITE_URL` must be correct before pushing: it builds the links inside
+confirmation emails and forms the OAuth redirect allow-list.
 
 ### Schema at a glance
 
