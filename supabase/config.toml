@@ -162,9 +162,15 @@ site_url = "env(SITE_URL)"
 # The public URL that Auth serves on. Defaults to the API external URL with `/auth/v1` appended.
 # external_url = ""
 # A list of *exact* URLs that auth providers are permitted to redirect to post authentication.
+# Listed literally, not via env(): the CLI substitutes env() for whole scalar
+# values but not inside array elements, so "env(SITE_URL)/auth/callback" was
+# being pushed as that exact string and allow-listing nothing.
+# site_url above stays on env() — that one does substitute.
 additional_redirect_urls = [
   "http://localhost:3000/auth/callback",
-  "env(SITE_URL)/auth/callback",
+  "http://localhost:3000/auth/confirm",
+  "https://nordlys.sandvaer.dk/auth/callback",
+  "https://nordlys.sandvaer.dk/auth/confirm",
 ]
 # How long tokens are valid for, in seconds. Defaults to 3600 (1 hour), maximum 604,800 (1 week).
 jwt_expiry = 3600
