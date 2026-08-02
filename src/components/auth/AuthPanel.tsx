@@ -24,7 +24,7 @@ function Submit({ label }: { label: string }) {
     <button
       type="submit"
       disabled={pending}
-      className="mt-2 w-full cursor-pointer rounded-[10px] bg-primary px-4 py-[13px] text-[15px] font-semibold text-on-primary transition-colors hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-55"
+      className="grad-primary neu-xs neu-press mt-2 w-full cursor-pointer rounded-[14px] px-4 py-[13px] text-[15px] font-bold text-on-primary transition-all hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-55"
     >
       {pending ? "One moment…" : label}
     </button>
@@ -68,22 +68,22 @@ export function AuthPanel({
 
   return (
     <div className="mx-auto max-w-[920px] px-6 py-16">
-      <div className="grid overflow-hidden rounded-[20px] border border-border md:grid-cols-2">
+      <div className="neu grid overflow-hidden rounded-[26px] md:grid-cols-2">
         {/* Testimonial panel */}
-        <div className="flex flex-col justify-between gap-10 bg-primary px-10 py-14">
+        <div className="flex flex-col justify-between gap-10 bg-[linear-gradient(135deg,oklch(0.58_0.19_20),oklch(0.545_0.2_350))] px-10 py-14">
           <div className="flex items-center gap-2.5">
             <span
               aria-hidden="true"
-              className="flex h-[30px] w-[30px] items-center justify-center rounded-full bg-on-primary font-serif text-sm font-semibold text-primary"
+              className="flex h-8 w-8 items-center justify-center rounded-[12px] bg-on-primary font-display text-[15px] font-bold text-primary-ink"
             >
               N
             </span>
-            <span className="font-serif text-lg font-semibold text-on-primary">
+            <span className="font-display text-lg font-semibold text-on-primary">
               Nordlys
             </span>
           </div>
 
-          <blockquote className="font-serif text-2xl italic leading-[1.45] text-on-primary">
+          <blockquote className="font-display text-2xl italic leading-[1.45] text-on-primary">
             &ldquo;Finding this community made moving to Malmö feel a lot less
             lonely.&rdquo;
           </blockquote>
@@ -200,7 +200,7 @@ export function AuthPanel({
                 <input type="hidden" name="next" value={next} />
                 <button
                   type="submit"
-                  className="w-full cursor-pointer rounded-[10px] border border-border bg-surface px-4 py-3 text-[14.5px] font-semibold text-ink transition-colors hover:bg-subtle"
+                  className="neu-sm neu-press w-full cursor-pointer rounded-[14px] bg-surface px-4 py-3 text-[14.5px] font-semibold text-ink transition-all hover:text-primary-ink"
                 >
                   Continue with Google
                 </button>

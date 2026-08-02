@@ -20,7 +20,7 @@ function Submit() {
     <button
       type="submit"
       disabled={pending}
-      className="cursor-pointer rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-55"
+      className="grad-primary neu-xs neu-press cursor-pointer rounded-[16px] px-6 py-3 text-sm font-semibold text-on-primary transition-all hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-55"
     >
       {pending ? "Posting…" : "Post discussion"}
     </button>
@@ -36,7 +36,7 @@ export function ThreadComposer() {
   return (
     <div className="mx-auto max-w-[760px] px-6 pb-24 pt-12">
       <header className="mb-7">
-        <h1 className="font-serif text-[30px] font-medium text-ink">
+        <h1 className="font-display text-[30px] font-medium text-ink">
           Start a discussion
         </h1>
         <p className="mt-1.5 text-sm text-ink-muted">
@@ -57,7 +57,7 @@ export function ThreadComposer() {
             required
             maxLength={160}
             placeholder="How long did your work permit actually take?"
-            className="font-serif text-lg"
+            className="font-display text-lg"
           />
           <FieldError>{state.fields?.title}</FieldError>
         </div>

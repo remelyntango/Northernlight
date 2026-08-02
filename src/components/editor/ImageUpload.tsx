@@ -106,7 +106,7 @@ export function ImageUpload({
       <input type="hidden" name={name} value={url} />
 
       {url ? (
-        <div className="relative mb-2 overflow-hidden rounded-[10px] border border-border">
+        <div className="neu-sm relative mb-2 overflow-hidden rounded-[16px]">
           <Image
             src={url}
             alt=""
@@ -126,7 +126,7 @@ export function ImageUpload({
       ) : null}
 
       <label
-        className={`inline-flex cursor-pointer items-center gap-2 rounded-full border border-border bg-subtle px-4 py-2 text-[13px] font-semibold text-ink-label transition-colors hover:bg-surface ${
+        className={`neu-sm neu-press inline-flex cursor-pointer items-center gap-2 rounded-full bg-surface px-4 py-2.5 text-[13px] font-semibold text-ink-label transition-all hover:text-ink ${
           busy ? "pointer-events-none opacity-60" : ""
         }`}
       >

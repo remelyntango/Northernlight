@@ -7,10 +7,10 @@ import type { ThreadWithAuthor } from "@/lib/types";
  *  with the reply count pinned right. */
 export function ThreadRow({ thread }: { thread: ThreadWithAuthor }) {
   return (
-    <article className="flex flex-col gap-3 border-b border-border py-5 sm:flex-row sm:items-center sm:gap-5">
+    <article className="neu-sm flex flex-col gap-3 rounded-[18px] bg-surface px-6 py-[22px] transition-all duration-200 hover:-translate-y-0.5 sm:flex-row sm:items-center sm:gap-5">
       <div className="min-w-0 flex-1">
         <div className="mb-1.5 flex flex-wrap items-center gap-2.5">
-          <span className="rounded-[10px] bg-accent-tint px-2.5 py-[3px] text-xs font-semibold text-accent-ink">
+          <span className="rounded-[10px] bg-accent-tint px-2.5 py-1 text-xs font-bold text-accent-ink">
             {thread.category}
           </span>
           <span className="text-[12.5px] text-ink-soft">
@@ -18,7 +18,7 @@ export function ThreadRow({ thread }: { thread: ThreadWithAuthor }) {
           </span>
         </div>
 
-        <h2 className="mb-1.5 font-serif text-[18.5px] font-medium leading-snug text-ink">
+        <h2 className="mb-1.5 font-display text-[18px] font-semibold leading-snug text-ink">
           <Link
             href={`/discussions/${thread.slug}`}
             className="transition-colors hover:text-primary-ink"

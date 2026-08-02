@@ -14,7 +14,7 @@ export function FeedCard({ item }: { item: FeedItem }) {
     : `/discussions/${item.slug}`;
 
   return (
-    <article className="rounded-[14px] border border-border bg-surface p-6 transition-colors hover:border-border-strong">
+    <article className="neu rounded-[20px] bg-surface p-[26px] transition-all duration-200 hover:-translate-y-0.5">
       <div className="mb-3 flex flex-wrap items-center gap-2.5">
         <Badge tone={isArticle ? "primary" : "accent"}>
           {isArticle ? "Article" : "Discussion"}
@@ -40,7 +40,7 @@ export function FeedCard({ item }: { item: FeedItem }) {
         </Link>
       ) : null}
 
-      <h2 className="mb-2 font-serif text-[21px] font-medium leading-[1.3] text-ink">
+      <h2 className="mb-2 font-display text-[20px] font-semibold leading-[1.3] text-ink">
         <Link href={href} className="transition-colors hover:text-primary-ink">
           {item.title}
         </Link>

@@ -47,7 +47,7 @@ export function UserMenu({ profile }: { profile: Profile }) {
       {open ? (
         <div
           role="menu"
-          className="absolute right-0 top-[calc(100%+10px)] z-30 w-56 overflow-hidden rounded-xl border border-border bg-surface py-1.5 shadow-lg shadow-black/5"
+          className="absolute right-0 top-[calc(100%+10px)] z-30 w-56 overflow-hidden neu rounded-[18px] bg-surface py-1.5"
         >
           <div className="border-b border-border px-4 pb-2.5 pt-1.5">
             <p className="truncate text-sm font-semibold text-ink">

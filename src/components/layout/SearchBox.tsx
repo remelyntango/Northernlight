@@ -26,12 +26,11 @@ export function SearchBox({
       method="get"
       role="search"
       className={cx(
-        "flex items-center gap-2 rounded-[20px] border border-border bg-subtle px-3.5 py-2",
-        "focus-within:border-primary",
+        "neu-inset flex items-center gap-2 rounded-[20px] bg-surface px-3.5 py-2.5",
         className,
       )}
     >
-      <span aria-hidden="true" className="shrink-0 text-sm text-ink-muted">
+      <span aria-hidden="true" className="shrink-0 text-sm text-primary-link">
         ⌕
       </span>
       <label className="sr-only" htmlFor="site-search">

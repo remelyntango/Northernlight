@@ -49,7 +49,7 @@ export default async function DiscussionsPage({
     <div className="mx-auto max-w-[900px] px-6 pb-24 pt-14">
       <header className="mb-7 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h1 className="mb-2 font-serif text-[34px] font-medium text-ink">
+          <h1 className="mb-2 font-display text-[34px] font-medium text-ink">
             Discussions
           </h1>
           <p className="text-[15px] text-ink-muted">
@@ -97,7 +97,7 @@ export default async function DiscussionsPage({
 
       {items.length > 0 ? (
         <>
-          <div className="flex flex-col">
+          <div className="flex flex-col gap-3.5">
             {items.map((thread) => (
               <ThreadRow key={thread.id} thread={thread} />
             ))}

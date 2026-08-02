@@ -77,7 +77,7 @@ export default async function ThreadPage({
           </span>
         </div>
 
-        <h1 className="mb-5 mt-4 font-serif text-[30px] font-medium leading-[1.25] text-ink sm:text-[36px]">
+        <h1 className="mb-5 mt-4 font-display text-[30px] font-medium leading-[1.25] text-ink sm:text-[36px]">
           {thread.title}
         </h1>
 
@@ -99,7 +99,7 @@ export default async function ThreadPage({
 
         <Prose markdown={thread.body_md} />
 
-        <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3 border-y border-border py-4">
+        <div className="neu-inset mt-7 flex flex-wrap items-center gap-x-6 gap-y-3 rounded-[18px] px-6 py-4">
           <LikeButton
             kind="thread"
             id={thread.id}

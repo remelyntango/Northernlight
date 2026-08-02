@@ -26,9 +26,9 @@ export function Pagination({
   }
 
   const link =
-    "rounded-full border border-border bg-surface px-4 py-2 text-sm font-semibold text-ink transition-colors hover:border-border-strong";
+    "neu-sm neu-press rounded-full bg-surface px-5 py-2.5 text-sm font-semibold text-ink transition-all";
   const disabled =
-    "rounded-full border border-border bg-subtle px-4 py-2 text-sm font-semibold text-ink-soft";
+    "neu-inset rounded-full bg-surface px-5 py-2.5 text-sm font-semibold text-ink-soft";
 
   return (
     <nav

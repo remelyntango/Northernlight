@@ -1,7 +1,7 @@
 import { cx } from "@/lib/utils";
 
-/** Content-type pill. Terracotta for articles, green for discussions —
- *  the mockup's only visual cue distinguishing the two in a mixed feed. */
+/** Content-type pill. Coral for articles, teal for discussions — the only cue
+ *  distinguishing the two in a mixed feed. */
 export function Badge({
   tone = "primary",
   children,
@@ -14,10 +14,10 @@ export function Badge({
   return (
     <span
       className={cx(
-        "inline-flex items-center rounded-[10px] px-2.5 py-[3px] text-xs font-semibold",
+        "inline-flex items-center rounded-[10px] px-3 py-1 text-xs font-bold",
         tone === "primary" && "bg-primary-tint text-primary-ink",
         tone === "accent" && "bg-accent-tint text-accent-ink",
-        tone === "neutral" && "border border-border bg-subtle text-ink-muted",
+        tone === "neutral" && "neu-inset bg-surface text-ink-soft",
         className,
       )}
     >

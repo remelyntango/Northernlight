@@ -1,9 +1,12 @@
 import type { ComponentProps, ReactNode } from "react";
 import { cx } from "@/lib/utils";
 
+/* Inputs are carved into the surface rather than outlined. That leaves them
+   without a real border, so the focus ring in globals.css is what makes them
+   identifiable to keyboard users — don't remove it. */
 const CONTROL =
-  "w-full rounded-[10px] border border-border bg-surface px-3.5 py-3 text-[14.5px] text-ink " +
-  "transition-colors placeholder:text-ink-soft focus:border-primary";
+  "neu-inset w-full rounded-[14px] bg-surface px-4 py-3 text-[14.5px] text-ink " +
+  "transition-shadow placeholder:text-ink-soft";
 
 export function Label({
   children,
@@ -17,7 +20,7 @@ export function Label({
   return (
     <label
       htmlFor={htmlFor}
-      className="mb-1.5 flex items-baseline justify-between gap-3 text-[13px] font-semibold text-ink-label"
+      className="mb-2 flex items-baseline justify-between gap-3 text-[13px] font-semibold text-ink-label"
     >
       <span>{children}</span>
       {hint ? (
@@ -33,7 +36,10 @@ export function Input({ className, ...rest }: ComponentProps<"input">) {
 
 export function Textarea({ className, ...rest }: ComponentProps<"textarea">) {
   return (
-    <textarea className={cx(CONTROL, "resize-y leading-relaxed", className)} {...rest} />
+    <textarea
+      className={cx(CONTROL, "resize-y leading-relaxed", className)}
+      {...rest}
+    />
   );
 }
 
@@ -49,7 +55,7 @@ export function Select({ className, children, ...rest }: ComponentProps<"select"
 export function FieldError({ children }: { children?: ReactNode }) {
   if (!children) return null;
   return (
-    <p role="alert" className="mt-1.5 text-[13px] text-danger">
+    <p role="alert" className="mt-2 text-[13px] font-medium text-danger">
       {children}
     </p>
   );
@@ -61,7 +67,7 @@ export function FormError({ children }: { children?: ReactNode }) {
   return (
     <p
       role="alert"
-      className="rounded-[10px] border border-danger/30 bg-danger/8 px-3.5 py-3 text-[14px] text-danger"
+      className="neu-inset rounded-[14px] bg-surface px-4 py-3 text-[14px] font-medium text-danger"
     >
       {children}
     </p>
@@ -71,7 +77,7 @@ export function FormError({ children }: { children?: ReactNode }) {
 export function FormNotice({ children }: { children?: ReactNode }) {
   if (!children) return null;
   return (
-    <p className="rounded-[10px] border border-accent/30 bg-accent-tint px-3.5 py-3 text-[14px] text-accent-ink">
+    <p className="rounded-[14px] bg-accent-tint px-4 py-3 text-[14px] font-medium text-accent-ink">
       {children}
     </p>
   );

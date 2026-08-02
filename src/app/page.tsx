@@ -34,10 +34,10 @@ export default async function HomePage({
       {/* Hero */}
       <section className="mx-auto grid max-w-[1280px] items-center gap-10 px-6 pb-10 pt-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
         <div>
-          <h1 className="mb-4 font-serif text-[38px] font-medium leading-[1.15] tracking-[-0.3px] text-ink sm:text-[46px]">
+          <h1 className="mb-4 font-display text-[38px] font-bold leading-[1.15] tracking-[-0.5px] text-ink sm:text-[46px]">
             Find your footing
             <br />
-            in Scandinavia.
+            in <span className="text-grad">Scandinavia.</span>
           </h1>
           <p className="mb-7 max-w-[480px] text-[17px] leading-[1.6] text-ink-muted">
             Real stories, honest advice and a community of expats across
@@ -133,7 +133,7 @@ export default async function HomePage({
             )}
           </Card>
 
-          <Card className="border-primary-edge bg-primary-tint p-[22px]">
+          <Card className="bg-[linear-gradient(135deg,oklch(0.88_0.06_30),oklch(0.86_0.07_350))] p-6">
             <SectionHeading>
               {profile ? "Share what you learned" : "Join the community"}
             </SectionHeading>

@@ -5,7 +5,7 @@ export default function NotFound() {
   return (
     <div className="mx-auto max-w-[560px] px-6 py-28 text-center">
       <p className="font-mono text-sm text-ink-soft">404</p>
-      <h1 className="mb-3 mt-2 font-serif text-[34px] font-medium text-ink">
+      <h1 className="mb-3 mt-2 font-display text-[34px] font-medium text-ink">
         We couldn&apos;t find that page.
       </h1>
       <p className="mb-8 text-[15px] leading-relaxed text-ink-muted">

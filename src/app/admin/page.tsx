@@ -66,7 +66,7 @@ export default async function AdminPage({
   return (
     <div className="mx-auto max-w-[900px] px-6 pb-24 pt-12">
       <header className="mb-8">
-        <h1 className="font-serif text-[30px] font-medium text-ink">
+        <h1 className="font-display text-[30px] font-medium text-ink">
           Moderation
         </h1>
         <p className="mt-1.5 text-sm text-ink-muted">
@@ -85,9 +85,9 @@ export default async function AdminPage({
           ].map((stat) => (
             <div
               key={stat.label}
-              className="rounded-[14px] border border-border bg-surface px-4 py-3.5"
+              className="neu-sm rounded-[16px] bg-surface px-4 py-3.5"
             >
-              <p className="font-serif text-2xl font-medium text-ink">
+              <p className="font-display text-2xl font-medium text-ink">
                 {stat.value}
               </p>
               <p className="text-[12.5px] text-ink-muted">{stat.label}</p>
@@ -97,7 +97,7 @@ export default async function AdminPage({
       ) : null}
 
       <section className="mb-12">
-        <h2 className="mb-4 font-serif text-lg font-medium text-ink">Reports</h2>
+        <h2 className="mb-4 font-display text-lg font-medium text-ink">Reports</h2>
 
         <nav aria-label="Filter reports" className="mb-5 flex flex-wrap gap-2.5">
           {FILTERS.map((f) => (
@@ -133,7 +133,7 @@ export default async function AdminPage({
                   ) : null}
                 </div>
 
-                <p className="font-serif text-[17px] font-medium text-ink">
+                <p className="font-display text-[17px] font-medium text-ink">
                   {report.target_url ? (
                     <Link href={report.target_url} className="hover:text-primary-ink">
                       {report.target_title}
@@ -154,7 +154,7 @@ export default async function AdminPage({
                 </p>
 
                 {report.note ? (
-                  <p className="mt-3 rounded-lg border border-border bg-subtle px-3.5 py-2.5 text-[13.5px] text-ink-strong">
+                  <p className="neu-inset mt-3 rounded-[12px] bg-surface px-4 py-3 text-[13.5px] text-ink-strong">
                     “{report.note}”
                   </p>
                 ) : null}
@@ -167,7 +167,7 @@ export default async function AdminPage({
                       <input type="hidden" name="reportId" value={report.id} />
                       <button
                         type="submit"
-                        className="cursor-pointer rounded-full border border-border px-4 py-1.5 text-[13px] font-semibold text-danger transition-colors hover:bg-danger hover:text-on-primary"
+                        className="neu-sm neu-press cursor-pointer rounded-full bg-surface px-4 py-2 text-[13px] font-semibold text-danger transition-all hover:brightness-105"
                       >
                         Delete content
                       </button>
@@ -209,7 +209,7 @@ export default async function AdminPage({
       </section>
 
       <section>
-        <h2 className="mb-4 font-serif text-lg font-medium text-ink">Members</h2>
+        <h2 className="mb-4 font-display text-lg font-medium text-ink">Members</h2>
         <Card className="p-0">
           <ul>
             {(members ?? []).map((member) => (
@@ -240,7 +240,7 @@ export default async function AdminPage({
                       />
                       <button
                         type="submit"
-                        className="cursor-pointer rounded-full border border-border bg-subtle px-3.5 py-1.5 text-[12.5px] font-semibold text-ink-label transition-colors hover:bg-surface"
+                        className="neu-sm neu-press cursor-pointer rounded-full bg-surface px-4 py-2 text-[12.5px] font-semibold text-ink-label transition-all hover:text-ink"
                       >
                         {member.role === "admin" ? "Demote" : "Make admin"}
                       </button>

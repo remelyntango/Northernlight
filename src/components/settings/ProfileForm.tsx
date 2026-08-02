@@ -19,7 +19,7 @@ function Save() {
     <button
       type="submit"
       disabled={pending}
-      className="cursor-pointer self-start rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover disabled:opacity-55"
+      className="grad-primary neu-xs neu-press cursor-pointer self-start rounded-[16px] px-5 py-2.5 text-sm font-semibold text-on-primary transition-all hover:brightness-110 disabled:opacity-55"
     >
       {pending ? "Saving…" : "Save profile"}
     </button>

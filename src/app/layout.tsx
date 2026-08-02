@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { Lora, Public_Sans } from "next/font/google";
+import { Poppins, Public_Sans } from "next/font/google";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import "./globals.css";
 
-const lora = Lora({
-  variable: "--font-lora",
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["500", "600", "700"],
   style: ["normal", "italic"],
   display: "swap",
 });
@@ -44,7 +44,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${lora.variable} ${publicSans.variable} h-full antialiased`}
+      className={`${poppins.variable} ${publicSans.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <a

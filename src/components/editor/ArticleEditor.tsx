@@ -37,8 +37,8 @@ function SaveButton({
       className={cx(
         "cursor-pointer rounded-full px-5 py-2.5 text-sm font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-55",
         variant === "primary"
-          ? "bg-primary text-on-primary hover:bg-primary-hover"
-          : "border border-border bg-subtle text-ink-label hover:bg-surface",
+          ? "grad-primary neu-xs neu-press text-on-primary hover:brightness-110"
+          : "neu-sm neu-press bg-surface text-ink-label hover:text-ink",
       )}
     >
       {pending ? "Saving…" : children}
@@ -63,7 +63,7 @@ export function ArticleEditor({ article }: { article?: ArticleWithAuthor }) {
     <div className="mx-auto max-w-[920px] px-6 pb-24 pt-12">
       <div className="mb-7 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="font-serif text-[30px] font-medium text-ink">
+          <h1 className="font-display text-[30px] font-medium text-ink">
             {isEdit ? "Edit article" : "Write an article"}
           </h1>
           <p className="mt-1.5 text-sm text-ink-muted">
@@ -128,7 +128,7 @@ export function ArticleEditor({ article }: { article?: ArticleWithAuthor }) {
             required
             maxLength={160}
             placeholder="Cracking the Danish CPR Number"
-            className="font-serif text-xl"
+            className="font-display text-xl"
           />
           <FieldError>{state.fields?.title}</FieldError>
         </div>
@@ -210,7 +210,7 @@ export function ArticleEditor({ article }: { article?: ArticleWithAuthor }) {
             <Label htmlFor="body">Body</Label>
             <div
               role="tablist"
-              className="flex rounded-full border border-border bg-subtle p-0.5"
+              className="neu-inset flex rounded-full bg-surface p-1"
             >
               <button
                 type="button"
@@ -256,13 +256,13 @@ export function ArticleEditor({ article }: { article?: ArticleWithAuthor }) {
             maxLength={60000}
             placeholder={"Write in Markdown.\n\n## A heading\n\n> A pull quote\n\n- A list item"}
             className={cx(
-              "w-full resize-y rounded-[10px] border border-border bg-surface px-4 py-3.5 font-mono text-[14px] leading-[1.7] text-ink focus:border-primary",
+              "neu-inset w-full resize-y rounded-[14px] bg-surface px-4 py-3.5 font-mono text-[14px] leading-[1.7] text-ink",
               tab === "preview" && "hidden",
             )}
           />
 
           {tab === "preview" ? (
-            <div className="min-h-[420px] rounded-[10px] border border-border bg-surface px-6 py-5">
+            <div className="neu-inset min-h-[420px] rounded-[16px] bg-surface px-6 py-5">
               {body.trim() ? (
                 <Prose markdown={body} />
               ) : (

@@ -55,7 +55,7 @@ export function ReportButton({
       {open ? (
         <form
           action={onSubmit}
-          className="absolute left-0 top-[calc(100%+8px)] z-30 w-72 rounded-xl border border-border bg-surface p-4 shadow-lg shadow-black/5"
+          className="absolute left-0 top-[calc(100%+8px)] z-30 w-72 neu rounded-[18px] bg-surface p-4"
         >
           <p className="mb-2.5 text-[13px] font-semibold text-ink">
             Report this {kind}
@@ -84,14 +84,14 @@ export function ReportButton({
             rows={2}
             maxLength={1000}
             placeholder="Anything else we should know? (optional)"
-            className="mt-3 w-full resize-y rounded-lg border border-border bg-surface px-3 py-2 text-[13px] text-ink focus:border-primary"
+            className="neu-inset mt-3 w-full resize-y rounded-[12px] bg-surface px-3.5 py-2.5 text-[13px] text-ink"
           />
 
           <div className="mt-3 flex items-center gap-3">
             <button
               type="submit"
               disabled={pending}
-              className="cursor-pointer rounded-lg bg-primary px-3.5 py-2 text-[13px] font-semibold text-on-primary hover:bg-primary-hover disabled:opacity-55"
+              className="grad-primary neu-xs neu-press cursor-pointer rounded-[12px] px-4 py-2 text-[13px] font-semibold text-on-primary transition-all hover:brightness-110 disabled:opacity-55"
             >
               {pending ? "Sending…" : "Submit"}
             </button>

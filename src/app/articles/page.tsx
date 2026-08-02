@@ -45,7 +45,7 @@ export default async function ArticlesPage({
   return (
     <div className="mx-auto max-w-[900px] px-6 pb-24 pt-14">
       <header className="mb-7">
-        <h1 className="mb-2 font-serif text-[34px] font-medium text-ink">
+        <h1 className="mb-2 font-display text-[34px] font-medium text-ink">
           Articles
         </h1>
         <p className="text-[15px] text-ink-muted">

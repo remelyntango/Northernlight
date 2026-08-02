@@ -26,7 +26,7 @@ export default async function SettingsPage() {
   return (
     <div className="mx-auto max-w-[900px] px-6 pb-24 pt-12">
       <header className="mb-8">
-        <h1 className="font-serif text-[30px] font-medium text-ink">
+        <h1 className="font-display text-[30px] font-medium text-ink">
           Your posts &amp; profile
         </h1>
         <p className="mt-1.5 text-sm text-ink-muted">
@@ -36,7 +36,7 @@ export default async function SettingsPage() {
 
       <div className="flex flex-col gap-8">
         <Card>
-          <h2 className="mb-5 font-serif text-lg font-medium text-ink">
+          <h2 className="mb-5 font-display text-lg font-medium text-ink">
             Profile
           </h2>
           <ProfileForm profile={profile} />
@@ -44,7 +44,7 @@ export default async function SettingsPage() {
 
         <section>
           <div className="mb-4 flex items-center justify-between gap-4">
-            <h2 className="font-serif text-lg font-medium text-ink">
+            <h2 className="font-display text-lg font-medium text-ink">
               Your articles
             </h2>
             <ButtonLink href="/write" size="sm">
@@ -69,7 +69,7 @@ export default async function SettingsPage() {
                           edited {timeAgo(a.updated_at)}
                         </span>
                       </div>
-                      <p className="truncate font-serif text-[17px] font-medium text-ink">
+                      <p className="truncate font-display text-[17px] font-medium text-ink">
                         {a.status === "published" ? (
                           <Link
                             href={`/articles/${a.slug}`}
@@ -89,7 +89,7 @@ export default async function SettingsPage() {
 
                     <Link
                       href={`/write/${a.id}`}
-                      className="shrink-0 rounded-full border border-border bg-subtle px-4 py-1.5 text-[13px] font-semibold text-ink-label transition-colors hover:bg-surface"
+                      className="neu-sm neu-press shrink-0 rounded-full bg-surface px-4 py-2 text-[13px] font-semibold text-ink-label transition-all hover:text-ink"
                     >
                       Edit
                     </Link>
@@ -107,7 +107,7 @@ export default async function SettingsPage() {
 
         <section>
           <div className="mb-4 flex items-center justify-between gap-4">
-            <h2 className="font-serif text-lg font-medium text-ink">
+            <h2 className="font-display text-lg font-medium text-ink">
               Your discussions
             </h2>
             <ButtonLink href="/discussions/new" size="sm" variant="secondary">
@@ -125,7 +125,7 @@ export default async function SettingsPage() {
                   >
                     <Link
                       href={`/discussions/${t.slug}`}
-                      className="font-serif text-[17px] font-medium text-ink hover:text-primary-ink"
+                      className="font-display text-[17px] font-medium text-ink hover:text-primary-ink"
                     >
                       {t.title}
                     </Link>

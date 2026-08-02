@@ -32,7 +32,7 @@ export function MobileMenu({ signedIn }: { signedIn: boolean }) {
         onClick={() => setOpen(!open)}
         aria-expanded={open}
         aria-label={open ? "Close menu" : "Open menu"}
-        className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-border bg-subtle text-ink md:hidden"
+        className="neu-sm neu-press flex h-10 w-10 cursor-pointer items-center justify-center rounded-[14px] bg-surface text-ink md:hidden"
       >
         <span aria-hidden="true" className="text-lg leading-none">
           {open ? "×" : "≡"}

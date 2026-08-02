@@ -47,7 +47,7 @@ export function Avatar({
       aria-hidden="true"
       className={cx(
         base,
-        "flex items-center justify-center bg-accent font-semibold text-on-primary",
+        "grad-accent neu-xs flex items-center justify-center font-bold text-on-primary",
       )}
     >
       {initialsOf(name)}

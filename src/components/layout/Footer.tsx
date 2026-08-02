@@ -9,11 +9,11 @@ export function Footer() {
           <div className="flex items-center gap-2.5">
             <span
               aria-hidden="true"
-              className="flex h-7 w-7 items-center justify-center rounded-full bg-primary font-serif text-[13px] font-semibold text-on-primary"
+              className="flex h-7 w-7 items-center justify-center rounded-full bg-primary font-display text-[13px] font-semibold text-on-primary"
             >
               N
             </span>
-            <span className="font-serif text-lg font-semibold text-ink">
+            <span className="font-display text-lg font-semibold text-ink">
               Nordlys
             </span>
           </div>

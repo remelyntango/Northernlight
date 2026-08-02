@@ -67,13 +67,13 @@ function EditForm({
         rows={3}
         required
         maxLength={8000}
-        className="w-full resize-y rounded-[10px] border border-border bg-surface px-3.5 py-2.5 text-sm leading-relaxed text-ink focus:border-primary"
+        className="neu-inset w-full resize-y rounded-[14px] bg-surface px-4 py-3 text-sm leading-relaxed text-ink"
       />
       <FieldError>{state.error}</FieldError>
       <div className="mt-2 flex items-center gap-3">
         <button
           type="submit"
-          className="cursor-pointer rounded-[10px] bg-primary px-4 py-2 text-[13px] font-semibold text-on-primary hover:bg-primary-hover"
+          className="grad-primary neu-xs neu-press cursor-pointer rounded-[13px] px-4 py-2 text-[13px] font-semibold text-on-primary transition-all hover:brightness-110"
         >
           Save
         </button>

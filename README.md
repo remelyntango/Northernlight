@@ -284,9 +284,40 @@ npx tsc --noEmit # typecheck
 
 ## Design
 
-The visual design comes from the Claude Design project *Nordlys Portal*. Colours,
-type scale and component shapes are transcribed into `@theme` tokens in
-`src/app/globals.css` — that file is the single source of truth, so restyling
-happens in one place.
+The visual direction is **neumorphic** ("soft UI"): surfaces are the same colour
+as the page, and every edge comes from a pair of opposing shadows rather than a
+border. `--color-surface` therefore equals `--color-canvas` on purpose — if they
+ever diverge, cards will look wrong.
 
-Typefaces: **Lora** (headings) and **Public Sans** (body), loaded via `next/font`.
+Everything lives in `@theme` tokens in `src/app/globals.css`, plus five utility
+classes that carry the style:
+
+| Class | Use |
+| --- | --- |
+| `.neu` | raised panel — cards, dropdowns |
+| `.neu-sm` / `.neu-xs` | smaller lift — rows, buttons, chips |
+| `.neu-inset` | carved in — inputs, search, empty states, the like bar |
+| `.neu-press` | depresses on `:active`, so pressing changes the lighting |
+| `.grad-primary` / `.grad-accent` / `.text-grad` | coral→pink and teal→green |
+
+Typefaces: **Poppins** (display) and **Public Sans** (body), via `next/font`.
+
+### Accessibility deviations from the mockup
+
+Two changes were necessary, both kept as close to the original as possible:
+
+**The primary gradient is darker.** The mockup used `oklch(0.72 …)`, which puts
+white button labels at **2.7:1** — well below the 4.5:1 needed to be readable.
+The gradient keeps the exact hue and chroma but drops to `0.58`, reaching
+**4.6:1**. Same colour family, legible labels. Muted text and the active nav
+colour were nudged the same way for the same reason.
+
+**Focus rings matter more here, not less.** Neumorphic edges sit at roughly
+1.4:1 against the page — far below the 3:1 WCAG expects of UI component
+boundaries (SC 1.4.11). That is inherent to the style and not fixable without
+abandoning it. Since inputs have no border at all, the focus ring in
+`globals.css` is the primary way a keyboard user can tell where they are.
+**Don't remove it.**
+
+To re-check after any colour change, the contrast maths is straightforward —
+convert oklch → sRGB → relative luminance and compare.

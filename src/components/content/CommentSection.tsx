@@ -35,7 +35,7 @@ export async function CommentSection({
 
   return (
     <section className="mt-10" aria-label="Comments">
-      <h2 className="mb-5 font-serif text-[19px] font-medium text-ink">
+      <h2 className="mb-5 font-display text-[19px] font-medium text-ink">
         {total === 0 ? "No comments yet" : pluralize(total, "comment")}
       </h2>
 

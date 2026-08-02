@@ -91,7 +91,7 @@ export default async function ArticlePage({
           </span>
         </div>
 
-        <h1 className="mb-5 mt-4 font-serif text-[34px] font-medium leading-[1.2] text-ink sm:text-[42px]">
+        <h1 className="mb-5 mt-4 font-display text-[34px] font-medium leading-[1.2] text-ink sm:text-[42px]">
           {article.title}
         </h1>
 
@@ -132,13 +132,15 @@ export default async function ArticlePage({
 
         {article.tags.length > 0 ? (
           <div className="mt-8 flex flex-wrap gap-2">
-            {article.tags.map((tag) => (
-              <Tag key={tag}>{tag}</Tag>
+            {article.tags.map((tag, i) => (
+              <Tag key={tag} index={i}>
+                {tag}
+              </Tag>
             ))}
           </div>
         ) : null}
 
-        <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3 border-y border-border py-4">
+        <div className="neu-inset mt-7 flex flex-wrap items-center gap-x-6 gap-y-3 rounded-[18px] px-6 py-4">
           <LikeButton
             kind="article"
             id={article.id}

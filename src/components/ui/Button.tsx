@@ -5,28 +5,26 @@ import { cx } from "@/lib/utils";
 type Variant = "primary" | "secondary" | "ghost" | "danger";
 type Size = "sm" | "md" | "lg";
 
+/** Raised by default, depressed on press — in this style the lighting is the
+ *  affordance, so interaction has to change it. */
 const VARIANTS: Record<Variant, string> = {
-  primary:
-    "bg-primary text-on-primary border border-primary hover:bg-primary-hover hover:border-primary-hover",
-  secondary:
-    "bg-subtle text-ink-label border border-border hover:bg-surface hover:text-ink",
-  ghost:
-    "bg-transparent text-ink border border-transparent hover:bg-subtle",
-  danger:
-    "bg-transparent text-danger border border-border hover:bg-danger hover:text-on-primary hover:border-danger",
+  primary: "grad-primary text-on-primary neu-xs neu-press hover:brightness-110",
+  secondary: "bg-surface text-ink-label neu-sm neu-press hover:text-ink",
+  ghost: "bg-transparent text-ink hover:text-primary-ink",
+  danger: "bg-surface text-danger neu-sm neu-press hover:brightness-105",
 };
 
 const SIZES: Record<Size, string> = {
-  sm: "text-[13px] px-3.5 py-1.5",
-  md: "text-sm px-[18px] py-[9px]",
-  lg: "text-[15px] px-6 py-3",
+  sm: "text-[13px] px-4 py-2 rounded-[13px]",
+  md: "text-sm px-[18px] py-2.5 rounded-[16px]",
+  lg: "text-[15px] px-6 py-3 rounded-[18px]",
 };
 
 function classes(variant: Variant, size: Size, full: boolean, extra?: string) {
   return cx(
-    "inline-flex items-center justify-center gap-2 rounded-full font-semibold",
-    "transition-colors cursor-pointer whitespace-nowrap",
-    "disabled:opacity-55 disabled:cursor-not-allowed",
+    "inline-flex items-center justify-center gap-2 font-semibold",
+    "transition-all duration-150 cursor-pointer whitespace-nowrap",
+    "disabled:opacity-55 disabled:cursor-not-allowed disabled:shadow-none",
     VARIANTS[variant],
     SIZES[size],
     full && "w-full",
@@ -50,10 +48,7 @@ export function Button({
   ...rest
 }: BaseProps & ComponentProps<"button">) {
   return (
-    <button
-      className={classes(variant, size, fullWidth, className)}
-      {...rest}
-    >
+    <button className={classes(variant, size, fullWidth, className)} {...rest}>
       {children}
     </button>
   );
@@ -74,8 +69,7 @@ export function ButtonLink({
   );
 }
 
-/** Square-cornered variant used inside forms, where the pill shape reads oddly
- *  next to rectangular inputs (matches the mockup's auth + comment buttons). */
+/** Form submit button — same gradient, squarer radius to sit beside inputs. */
 export function SubmitButton({
   className,
   children,
@@ -84,9 +78,10 @@ export function SubmitButton({
   return (
     <button
       className={cx(
-        "inline-flex items-center justify-center rounded-[10px] bg-primary px-[18px] py-[13px]",
-        "text-[15px] font-semibold text-on-primary transition-colors",
-        "hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-55",
+        "inline-flex cursor-pointer items-center justify-center rounded-[14px] px-[18px] py-[13px]",
+        "grad-primary neu-xs neu-press text-[15px] font-semibold text-on-primary",
+        "transition-all duration-150 hover:brightness-110",
+        "disabled:cursor-not-allowed disabled:opacity-55 disabled:shadow-none",
         className,
       )}
       {...rest}

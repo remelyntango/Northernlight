@@ -11,17 +11,17 @@ export async function Nav() {
   const profile = await getCurrentProfile();
 
   return (
-    <header className="sticky top-0 z-20 border-b border-border bg-surface">
-      <div className="mx-auto flex h-[76px] max-w-[1280px] items-center justify-between gap-4 px-6">
+    <header className="sticky top-0 z-20 bg-canvas shadow-[0_4px_14px_var(--color-shade)]">
+      <div className="mx-auto flex h-[80px] max-w-[1280px] items-center justify-between gap-4 px-6">
         <div className="flex min-w-0 shrink-0 items-center gap-6">
           <Link href="/" className="flex shrink-0 items-center gap-2.5">
             <span
               aria-hidden="true"
-              className="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-primary font-serif text-base font-semibold text-on-primary"
+              className="grad-primary neu-xs flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-[14px] font-display text-[17px] font-bold text-on-primary"
             >
               N
             </span>
-            <span className="whitespace-nowrap font-serif text-[21px] font-semibold tracking-[0.2px] text-ink">
+            <span className="text-grad whitespace-nowrap font-display text-[21px] font-bold tracking-[-0.2px]">
               Nordlys
             </span>
           </Link>

@@ -13,7 +13,7 @@ function Submit({ label }: { label: string }) {
     <button
       type="submit"
       disabled={pending}
-      className="shrink-0 cursor-pointer self-start rounded-[10px] bg-primary px-[18px] py-2.5 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-55"
+      className="grad-primary neu-xs neu-press shrink-0 cursor-pointer self-start rounded-[14px] px-[18px] py-3 text-sm font-semibold text-on-primary transition-all hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-55 disabled:shadow-none"
     >
       {pending ? "Posting…" : label}
     </button>
@@ -82,7 +82,7 @@ export function CommentForm({
             maxLength={8000}
             autoFocus={autoFocus}
             placeholder={placeholder}
-            className="min-h-[46px] flex-1 resize-y rounded-[10px] border border-border bg-surface px-3.5 py-2.5 text-sm leading-relaxed text-ink placeholder:text-ink-soft focus:border-primary"
+            className="neu-inset min-h-[48px] flex-1 resize-y rounded-[14px] bg-surface px-4 py-3 text-sm leading-relaxed text-ink placeholder:text-ink-soft"
           />
           <Submit label={submitLabel} />
         </div>

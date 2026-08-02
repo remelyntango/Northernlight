@@ -24,7 +24,7 @@ const GROUPS = [
 function ResultRow({ result }: { result: SearchResult }) {
   return (
     <article className="border-b border-border py-5 last:border-b-0">
-      <h3 className="mb-1.5 font-serif text-[18px] font-medium leading-snug text-ink">
+      <h3 className="mb-1.5 font-display text-[18px] font-medium leading-snug text-ink">
         <Link href={result.url} className="transition-colors hover:text-primary-ink">
           {result.title}
         </Link>
@@ -90,7 +90,7 @@ async function Results({ q }: { q: string }) {
           return (
             <section key={group.kind}>
               <div className="mb-1 flex items-center gap-2.5">
-                <h2 className="font-serif text-[19px] font-medium text-ink">
+                <h2 className="font-display text-[19px] font-medium text-ink">
                   {group.label}
                 </h2>
                 <Badge tone={group.tone}>{rows.length}</Badge>
@@ -118,7 +118,7 @@ export default async function SearchPage({
 
   return (
     <div className="mx-auto max-w-[760px] px-6 pb-24 pt-14">
-      <h1 className="mb-2 font-serif text-[34px] font-medium text-ink">
+      <h1 className="mb-2 font-display text-[34px] font-medium text-ink">
         Search
       </h1>
       <p className="mb-6 text-[15px] text-ink-muted">
