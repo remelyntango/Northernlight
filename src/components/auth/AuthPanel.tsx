@@ -43,10 +43,12 @@ export function AuthPanel({
   mode,
   next,
   errorCode,
+  googleEnabled = false,
 }: {
   mode: "signin" | "signup";
   next: string;
   errorCode?: string;
+  googleEnabled?: boolean;
 }) {
   const isSignUp = mode === "signup";
 
@@ -183,21 +185,28 @@ export function AuthPanel({
             <Submit label={isSignUp ? "Create account" : "Log in"} />
           </form>
 
-          <div className="my-5 flex items-center gap-3">
-            <span className="h-px flex-1 bg-border" />
-            <span className="text-[12.5px] text-ink-soft">or</span>
-            <span className="h-px flex-1 bg-border" />
-          </div>
+          {/* Only offered when the provider is actually configured — a button
+              that always renders would hand new members an error page on the
+              one screen where they have least patience for it. */}
+          {googleEnabled ? (
+            <>
+              <div className="my-5 flex items-center gap-3">
+                <span className="h-px flex-1 bg-border" />
+                <span className="text-[12.5px] text-ink-soft">or</span>
+                <span className="h-px flex-1 bg-border" />
+              </div>
 
-          <form action={signInWithGoogle}>
-            <input type="hidden" name="next" value={next} />
-            <button
-              type="submit"
-              className="w-full cursor-pointer rounded-[10px] border border-border bg-surface px-4 py-3 text-[14.5px] font-semibold text-ink transition-colors hover:bg-subtle"
-            >
-              Continue with Google
-            </button>
-          </form>
+              <form action={signInWithGoogle}>
+                <input type="hidden" name="next" value={next} />
+                <button
+                  type="submit"
+                  className="w-full cursor-pointer rounded-[10px] border border-border bg-surface px-4 py-3 text-[14.5px] font-semibold text-ink transition-colors hover:bg-subtle"
+                >
+                  Continue with Google
+                </button>
+              </form>
+            </>
+          ) : null}
 
           <p className="mt-5 text-center text-[13.5px] text-ink-muted">
             Reading articles and discussions never requires an account.

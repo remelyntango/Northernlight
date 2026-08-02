@@ -15,5 +15,12 @@ export default async function SignupPage({
   const { next, error } = await searchParams;
   const target = next?.startsWith("/") && !next.startsWith("//") ? next : "/";
 
-  return <AuthPanel mode="signup" next={target} errorCode={error} />;
+  return (
+    <AuthPanel
+      mode="signup"
+      next={target}
+      errorCode={error}
+      googleEnabled={process.env.NEXT_PUBLIC_GOOGLE_AUTH_ENABLED === "true"}
+    />
+  );
 }
