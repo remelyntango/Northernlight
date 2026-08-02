@@ -68,46 +68,58 @@ async function get(path, cookie) {
 /* ------------------------------------------------------- fresh sign-up --- */
 console.log("\nSign-up (the real path a new member takes)");
 
-// Note: Supabase rejects some domains outright (example.com, .test, .invalid),
-// so use a plausible one.
-const newEmail = `verify-${Date.now()}@nordlys.demo`;
+// What's actually ours to test here is the on_auth_user_created trigger: does a
+// new auth user get a matching profile, with the right name and no privileges?
+//
+// Driving that through the public signUp endpoint is a poor way to check it —
+// it sends a real confirmation email (2/hour on Supabase's built-in SMTP, so
+// the suite throttles itself) and it fails on domain validation for any address
+// we could safely invent. The admin API creates the user through the same
+// trigger with none of that, so use it when a service key is available.
 const anon = createClient(SUPABASE_URL, ANON, { auth: { persistSession: false } });
+const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-const { data: signUpData, error: signUpErr } = await anon.auth.signUp({
-  email: newEmail,
-  password: "verify-password-123",
-  options: { data: { display_name: "Verification User" } },
-});
-
-// Supabase's built-in SMTP allows only a couple of messages per hour. Hitting
-// that limit means the request got all the way to "send the confirmation
-// email", so the signup path itself is fine — it's the mail transport that is
-// throttled. Report it rather than calling it a failure.
-const rateLimited = /rate limit/i.test(signUpErr?.message ?? "");
-
-if (rateLimited) {
+if (!serviceKey) {
   console.log(
-    `  ⚠ signUp reached the email step but the built-in SMTP is rate limited.\n` +
-      `      This WILL block real signups in production. Configure a custom SMTP\n` +
-      `      provider under Authentication → Emails, or disable email confirmation.`,
+    "  – skipped: set SUPABASE_SERVICE_ROLE_KEY to verify the new-user trigger.",
   );
 } else {
-  check("signUp succeeds", !signUpErr, signUpErr?.message);
-}
+  const admin = createClient(SUPABASE_URL, serviceKey, {
+    auth: { autoRefreshToken: false, persistSession: false },
+  });
 
-if (signUpData?.user) {
-  console.log(
-    `      email confirmation is ${signUpData.session ? "OFF — signed in immediately" : "ON — no session until the link is opened"}`,
-  );
+  const email = `verify-${Date.now()}@nordlys.demo`;
+  const { data: created, error: createErr } = await admin.auth.admin.createUser({
+    email,
+    password: "verify-password-123",
+    email_confirm: true,
+    user_metadata: { display_name: "Verification User" },
+  });
+  check("new auth user can be created", !createErr, createErr?.message);
 
-  // The on_auth_user_created trigger should have written the profile.
-  const { data: profile } = await anon
-    .from("profiles")
-    .select("display_name, role")
-    .eq("id", signUpData.user.id)
-    .maybeSingle();
-  check("profile row created by trigger", profile?.display_name === "Verification User", JSON.stringify(profile));
-  check("new users are not admins", profile?.role === "member", profile?.role);
+  if (created?.user) {
+    const { data: profile } = await anon
+      .from("profiles")
+      .select("display_name, role")
+      .eq("id", created.user.id)
+      .maybeSingle();
+
+    check(
+      "profile row created by trigger",
+      profile?.display_name === "Verification User",
+      JSON.stringify(profile),
+    );
+    check("new users are not admins", profile?.role === "member", profile?.role);
+
+    // The new account must actually be able to sign in.
+    const { error: loginErr } = await anon.auth.signInWithPassword({
+      email,
+      password: "verify-password-123",
+    });
+    check("new user can sign in", !loginErr, loginErr?.message);
+
+    await admin.auth.admin.deleteUser(created.user.id);
+  }
 }
 
 /* ------------------------------------------------- signed-in browsing --- */
